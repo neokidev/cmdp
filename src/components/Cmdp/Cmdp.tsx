@@ -76,15 +76,15 @@ export const Cmdp = () => {
               setIsOpen(false);
             }}
             as="div"
-            className="relative mx-auto max-w-xl divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black/5"
+            className="relative mx-auto max-w-xl bg-gray-800 divide-y divide-white/10 overflow-hidden rounded-xl shadow-2xl ring-1 ring-black/5"
           >
-            <div className="flex items-center px-4">
+            <div className="flex items-center px-2">
               <Combobox.Input
                 onChange={(event) => {
                   console.log('onChange');
                   setQuery(event.target.value);
                 }}
-                className="h-12 w-full border-0 bg-transparent pl-2 text-sm text-gray-800 placeholder-gray-400 focus:outline-none"
+                className="h-14 w-full border-0 caret-gray-400 bg-transparent pl-2 text-white placeholder-gray-400 focus:outline-none"
                 placeholder="Search..."
                 autoCorrect="off"
                 autoCapitalize="off"
@@ -94,34 +94,35 @@ export const Cmdp = () => {
             {filteredProjects.length > 0 && (
               <Combobox.Options
                 static
-                className="max-h-96 overflow-y-auto py-4 text-sm"
+                className="h-96 w-full overflow-y-auto text-sm"
               >
-                {filteredProjects.map((project) => (
-                  <Combobox.Option key={project.id} value={project}>
-                    {({ active }) => (
-                      <div
-                        className={`space-x-1 truncate px-4 py-2 ${
-                          active ? 'bg-indigo-600' : 'bg-white'
-                        }`}
-                      >
-                        <span
-                          className={`font-medium ${
-                            active ? 'text-white' : 'text-gray-900'
+                <div className="relative w-full box-border">
+                  {filteredProjects.map((project, index) => (
+                    <Combobox.Option
+                      key={project.id}
+                      value={project}
+                      className="absolute w-full px-2 box-border h-10"
+                      style={{
+                        top: `${2.5 * index}rem`,
+                      }}
+                    >
+                      {({ active }) => (
+                        <div
+                          className={`h-10 w-full flex items-center truncate box-border rounded-lg overflow-hidden ${
+                            active ? 'bg-white/10' : ''
                           }`}
                         >
-                          {project.title}
-                        </span>
-                        <span
-                          className={
-                            active ? 'text-indigo-200' : 'text-gray-400'
-                          }
-                        >
-                          in {project.team}
-                        </span>
-                      </div>
-                    )}
-                  </Combobox.Option>
-                ))}
+                          <span className="text-white flex-1 min-w-0 truncate px-2">
+                            {project.title}
+                          </span>
+                          <span className="text-gray-400 min-w-0 max-w-[50%] truncate px-2">
+                            in {project.team}
+                          </span>
+                        </div>
+                      )}
+                    </Combobox.Option>
+                  ))}
+                </div>
               </Combobox.Options>
             )}
             {query && filteredProjects.length === 0 && (
