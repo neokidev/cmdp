@@ -28,7 +28,7 @@ export const Cmdp = () => {
 
   useEffect(() => {
     function onKeydown(event: globalThis.KeyboardEvent) {
-      if (event.key === 'k' && event.metaKey) {
+      if (event.key === 'p' && event.metaKey) {
         event.preventDefault();
         setIsOpen((isOpen) => !isOpen);
       }
