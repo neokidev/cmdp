@@ -24,7 +24,7 @@ export const Cmdp = () => {
     ? projects.filter((project) =>
         project.title.toLowerCase().includes(query.toLowerCase())
       )
-    : [];
+    : projects;
 
   useEffect(() => {
     function onKeydown(event: globalThis.KeyboardEvent) {
